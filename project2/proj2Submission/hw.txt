@@ -1,0 +1,44 @@
+1.) Output will be:
+endlendl
+grendl
+
+2.) It will print a right-triangle (sloping down and to the right) 
+shape made of '#' characters with a base the width of what the 
+user inputs as side.
+
+3.)
+#include <iostream>
+using namespace std;
+
+int main() {
+	int side;
+	int j;
+	cout << "Enter a number: ";
+	cin >> side;
+	for (int i = 0; i < side; i++) {
+		j = i;
+		while (j >= 0) {
+			cout << "#";
+			j -= 1;
+		}
+		cout << "\n";
+	}
+}
+
+4.)
+switch (codeSection) {
+case 281:
+	cout << "bigamy";
+	break;
+case 321:
+case 322:
+	cout << "selling illegal lottery tickets";
+	break;
+case 383:
+	cout << "selling rancid butter";
+	break;
+case 598:
+	cout << "injuring a bird in a public cemetary";
+	break;
+default:
+	cout << "some other crime";

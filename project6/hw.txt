@@ -1,0 +1,166 @@
+Project 6 Solutions - Douglas Frattini Edwards
+
+1.) --------------------------------------------------------------------------|
+a)
+int main()
+{
+    int arr[3] = { 5, 10, 15 };
+    int* ptr = arr;
+
+    *ptr = 10;          // set arr[0] to 10
+    *(ptr + 1) = 20;      // set arr[1] to 20
+    ptr += 2;
+    *ptr = 30;        // set arr[2] to 30
+
+    while (ptr >= arr)
+    {
+        cout << *ptr << endl;    // print values
+        ptr--;
+    }
+}
+
+b)
+Explanation: The issue is that a simple pointer pToMax is taken as a parameter,
+where instead it should actually be a reference to a pointer. This is clear by
+observing the activity of the main routine and the void return value of the
+function, indicating that it is supposed to be a reference to a pointer. This
+can be fixed simply by adding an '&' char right before the '*' in the pointer
+parameter in the function header line. Fixed code below:
+
+void findMax(int arr[], int n, int*& pToMax)
+{
+    if (n <= 0)
+        return;      // no items, no maximum!
+
+    pToMax = arr;
+
+    for (int i = 1; i < n; i++)
+    {
+        if (arr[i] > *pToMax)
+            pToMax = arr + i;
+    }
+}
+
+c)
+Explanation: int* ptr was an uninitialized pointer and therefore did not 
+contain an address for the result to be stored in. I solved the problem by
+creating an uninitialized int variable and giving it's address to ptr.
+
+int main()
+{
+    int result;
+    int* ptr = &result;
+    computeCube(5, ptr);
+    cout << "Five cubed is " << *ptr << endl;
+}
+
+d)
+Explanation: The function failed because it continuously compared the two 
+pointers (str1 and str2) to eachother instead of comparing the values stored
+at their address. The pointers themselves will always evaluate as being
+different that eachother, as they belong to different objects in memory. The 
+solution is to simplify dereference the pointers using '*'s wherever a
+comparison between the two pointers takes place.
+
+bool strequal(const char str1[], const char str2[])
+{
+    while (*str1 != 0 && *str2 != 0)  // zero bytes at ends
+    {
+        if (*str1 != *str2)  // compare corresponding characters
+            return false;
+        str1++;            // advance to the next character
+        str2++;
+    }
+    return *str1 == *str2;   // both ended at same time?
+}
+
+e)
+Explanation: The problem with this code is that the getPtrToArray function 
+creates an array, returns a pointer to that array, and upon returning a value
+the function ends and thus the array is deleted. 
+
+2.) --------------------------------------------------------------------------|
+Solutions a-j found below:
+
+double* cat;
+double mouse[5] = {0};
+cat = mouse + 4;
+*cat = 25; // d
+*(mouse + 3) = 54;
+cat -= 3;
+(cat - 1)[2] = 42; //g
+cat[0] = 17;
+bool d = cat == mouse;
+bool b = *cat == *(cat + 1);
+
+3.) --------------------------------------------------------------------------|
+a)
+double mean(const double* scores, int numScores)
+{
+    double tot = 0;
+    int count = 0;
+    while (count < numScores)
+    {
+        tot += *(scores + count);
+        count++;
+    }
+    return tot / numScores;
+}
+
+b)
+const char* findTheChar(const char* str, char chr)
+{
+    for (int k = 0; *(str + k) != 0; k++)
+        if (*(str + k) == chr)
+            return (str + k);
+
+    return nullptr;
+}
+
+c)
+const char* findTheChar(const char* str, char chr)
+{
+    while (*str != 0) {
+        if (*str == chr)
+            return (str);
+        str++;
+    }
+
+    return nullptr;
+}
+
+4.)
+First it would print "3" (and a newline) because it's subtracting the pointer 
+to the 3th item in the address from the address of the 6th item, a difference
+of three. Next, it prints the items of the array in this order:
+4
+79
+-1
+9
+22
+19
+
+4 is the first because of the swap2 call and because swap1 doesn't do anything.
+79 is because the item at array+1 is changed to 79.
+-1 because maxwell moved the pointer to where 5 was, the 5 was then changed to 
+a negative 1, and then swap2 moved it to where the 4 was.
+9 because maxwell moved the pointer to the 1 item in the array, ptr += 2 moved 
+it to the 3rd item in the array, and ptr[1] = 9 set the 4th item to be 9.
+22 and 19 were unchanged from the original array.
+
+5.)
+void removeS(char str[]) {
+    char* ptr = str;
+    while (*ptr != 0) {
+        if (*ptr == 's' || *str == 'S') {
+            while (*(ptr + 1) != '\0') {
+                *ptr = *(ptr + 1);
+                ptr++;
+            }
+            *ptr = '\0';
+            ptr = str;
+        }
+        else
+            ptr++;
+    }
+}

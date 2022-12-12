@@ -1,0 +1,7 @@
+﻿  rabbits.cpp
+C:\UCLA\cs31\project7\rabbits.cpp(700,47): warning C4244: '+=': conversion from 'double' to 'float', possible loss of data
+C:\UCLA\cs31\project7\rabbits.cpp(702,45): warning C4244: '+=': conversion from 'double' to 'float', possible loss of data
+C:\UCLA\cs31\project7\rabbits.cpp(704,47): warning C4244: '+=': conversion from 'double' to 'float', possible loss of data
+C:\UCLA\cs31\project7\rabbits.cpp(706,47): warning C4244: '+=': conversion from 'double' to 'float', possible loss of data
+C:\UCLA\cs31\project7\rabbits.cpp(709,37): warning C4244: '+=': conversion from 'double' to 'float', possible loss of data
+  project7.vcxproj -> C:\UCLA\cs31\project7\Debug\project7.exe
